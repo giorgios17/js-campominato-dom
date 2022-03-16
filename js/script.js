@@ -37,6 +37,15 @@ else{}
 
 const totalSquares = columns * rows;
 
+//creazione array bombe
+const positionsBomb = [];
+
+for(let i=0; positionsBomb.length < 16; i++){
+    let bomb = numeroUnico(1, totalSquares, positionsBomb);
+    positionsBomb.push(bomb);
+}
+console.log(positionsBomb)
+
 //creazione quadrati dentro la griglia
 for(let i=0; i < totalSquares; i++){
     const square = createSquare()
@@ -55,11 +64,7 @@ for(let i=0; i < totalSquares; i++){
     }
 
 
-//function click cambio colore
-    square.addEventListener('click', function(){
-    square.classList.toggle('bg-blue')
 
-    })
 }
 
 //function create square
@@ -85,11 +90,21 @@ function numeroUnico (min, max, used){
     return numeroUnico;
 }
 
-const positionsBomb = [];
+//function click cambio colore
+    for(let i=1; i <= totalSquares; i++){
+    const square = document.getElementById(i)
+    
+    square.addEventListener('click', function(){
 
-for(let i=0; positionsBomb.length < 16; i++){
-    let bomb = numeroUnico(1, totalSquares, positionsBomb);
-    positionsBomb.push(bomb);
-}
-console.log(positionsBomb)
+        const isBomb = positionsBomb.includes(i);
+        if(isBomb){
+            square.classList.add('bg-red');
+        }
+        else{
+            square.classList.add('bg-blue');
+        }
+    })
+    }
+
+    
 
