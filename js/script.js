@@ -15,6 +15,7 @@ BONUS:
 */
 
 let difficulty;
+
 do{
     difficulty = parseInt(prompt('Scegli un livello di difficoltà tra 1, 2 o 3'));
 } while (difficulty < 1 || difficulty > 3 || isNaN(difficulty));
@@ -39,7 +40,7 @@ const totalSquares = columns * rows;
 //creazione quadrati dentro la griglia
 for(let i=0; i < totalSquares; i++){
     const square = createSquare()
-    square.id = 'square' + (i+1);
+    square.id = (i+1);
     grid.appendChild(square);
     square.innerHTML = [i + 1];
     
@@ -56,7 +57,7 @@ for(let i=0; i < totalSquares; i++){
 
 //function click cambio colore
     square.addEventListener('click', function(){
-        square.classList.toggle('bg-blue')
+    square.classList.toggle('bg-blue')
 
     })
 }
@@ -67,9 +68,6 @@ function createSquare(){
     square.classList.add('square');
     return square;
 }
-
-
-
 
 // numero random in un determinato range
 function numeroRandomRange(min, max){
