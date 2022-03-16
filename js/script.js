@@ -1,7 +1,18 @@
-//Creare una griglia di gioco quadrata, in cui ogni cella contiene un numero 
-//tra quelli compresi in un range compreso tra 1 e 100
-//Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro.
+/*Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe.
+I numeri nella lista delle bombe non possono essere duplicati.
 
+In seguito l'utente clicca su una cella: se il numero è presente 
+nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina, 
+altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
+
+La partita termina quando il giocatore clicca su una bomba o raggiunge il numero massimo possibile di numeri consentiti.
+Al termine della partita il software deve comunicare il punteggio, 
+cioè il numero di volte che l’utente ha cliccato su una cella che non era una b.
+
+BONUS:
+1- quando si clicca su una bomba e finisce la partita, evitare che si possa cliccare su altre celle
+2- quando si clicca su una bomba e finisce la partita, il software scopre tutte le bombe nascoste
+*/
 
 let difficulty;
 do{
@@ -24,31 +35,24 @@ else if(difficulty == 3){
 else{}
 
 const totalSquares = columns * rows;
-//const allNumberExtract = [];
 
 //creazione quadrati dentro la griglia
 for(let i=0; i < totalSquares; i++){
     const square = createSquare()
+    square.id = 'square' + (i+1);
     grid.appendChild(square);
     square.innerHTML = [i + 1];
-    // let numberExtract;
     
     if(difficulty == 2){
         square.classList.add('width9');
-      //  numberExtract = numeroUnico(1, 81, allNumberExtract);
     }
     else if(difficulty == 3){
         square.classList.add('width7');
-      //  numberExtract = numeroUnico(1, 49, allNumberExtract);
     }
     else{
         square.classList.add('width10');
-       // numberExtract = numeroUnico(1, 100, allNumberExtract);
     }
-/*
-    square.innerHTML = numberExtract;
-    allNumberExtract.push(numberExtract);
-*/
+
 
 //function click cambio colore
     square.addEventListener('click', function(){
@@ -65,7 +69,7 @@ function createSquare(){
 }
 
 
-/*
+
 
 // numero random in un determinato range
 function numeroRandomRange(min, max){
@@ -82,6 +86,12 @@ function numeroUnico (min, max, used){
     }
     return numeroUnico;
 }
-*/
 
+const positionsBomb = [];
+
+for(let i=0; positionsBomb.length < 16; i++){
+    let bomb = numeroUnico(1, totalSquares, positionsBomb);
+    positionsBomb.push(bomb);
+}
+console.log(positionsBomb)
 
