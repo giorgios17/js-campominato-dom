@@ -94,15 +94,22 @@ function numeroUnico (min, max, used){
     for(let i=1; i <= totalSquares; i++){
     const square = document.getElementById(i)
     
+    let score = 0;
+
     square.addEventListener('click', function(){
 
         const isBomb = positionsBomb.includes(i);
         if(isBomb){
             square.classList.add('bg-red');
+            document.querySelector('.container').classList.add('pointer-none');
+            document.querySelector('.game-over').classList.remove('d-none');
+            document.querySelector('.game-over').innerHTML = `'HAI PERSO! Il tuo punteggio è: ${score}`
         }
         else{
             square.classList.add('bg-blue');
+            score = score + 1;
         }
+        console.log(score)
     })
     }
 
