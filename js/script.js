@@ -97,12 +97,11 @@ let score = 0;
 for(let i=1; i <= totalSquares; i++){
     const square = document.getElementById(i)
     
-
     square.addEventListener('click', function(){
-
         const isBomb = positionsBomb.includes(i);
         if(isBomb){
             square.classList.add('bg-red');
+            square.innerHTML = `<i class="fas fa-bomb"></i>`
             document.querySelector('.container').classList.add('pointer-none');
             document.querySelector('.game-over').classList.remove('d-none');
             document.querySelector('.game-over').innerHTML = `'HAI PERSO! Il tuo punteggio è: ${score}!`
@@ -111,7 +110,6 @@ for(let i=1; i <= totalSquares; i++){
             square.classList.add('bg-blue');
             score = score + 1;
         }
-        console.log(score)
     })
 }
 
