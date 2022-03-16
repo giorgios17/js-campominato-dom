@@ -90,11 +90,13 @@ function numeroUnico (min, max, used){
     return numeroUnico;
 }
 
+let score = 0;
+
+
 //function click cambio colore
-    for(let i=1; i <= totalSquares; i++){
+for(let i=1; i <= totalSquares; i++){
     const square = document.getElementById(i)
     
-    let score = 0;
 
     square.addEventListener('click', function(){
 
@@ -103,7 +105,7 @@ function numeroUnico (min, max, used){
             square.classList.add('bg-red');
             document.querySelector('.container').classList.add('pointer-none');
             document.querySelector('.game-over').classList.remove('d-none');
-            document.querySelector('.game-over').innerHTML = `'HAI PERSO! Il tuo punteggio è: ${score}`
+            document.querySelector('.game-over').innerHTML = `'HAI PERSO! Il tuo punteggio è: ${score}!`
         }
         else{
             square.classList.add('bg-blue');
@@ -111,7 +113,7 @@ function numeroUnico (min, max, used){
         }
         console.log(score)
     })
-    }
+}
 
     
 
