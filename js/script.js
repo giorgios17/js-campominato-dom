@@ -108,6 +108,7 @@ for(let i=1; i <= totalSquares; i++){
         }
         else{
             square.classList.add('bg-blue');
+            square.classList.add('pointer-none');
             score = score + 1;
         }
     })
