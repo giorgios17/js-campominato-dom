@@ -14,16 +14,20 @@ BONUS:
 2- quando si clicca su una bomba e finisce la partita, il software scopre tutte le bombe nascoste
 */
 
+const grid = document.querySelector('.grid');
+const positionsBomb = [];
 let difficulty;
+let score = 0;
+let columns = 10;
+let rows = 10;
 
+//scelta difficoltà
 do{
     difficulty = parseInt(prompt('Scegli un livello di difficoltà tra 1, 2 o 3'));
 } while (difficulty < 1 || difficulty > 3 || isNaN(difficulty));
 
-const grid = document.querySelector('.grid');
 
-let columns = 10;
-let rows = 10;
+
 
 if(difficulty == 2){
     columns = 9;
@@ -37,16 +41,14 @@ else{}
 
 const totalSquares = columns * rows;
 
-//creazione array bombe
-const positionsBomb = [];
+//array bombe
 
 for(let i=0; positionsBomb.length < 16; i++){
     let bomb = numeroUnico(1, totalSquares, positionsBomb);
     positionsBomb.push(bomb);
 }
-console.log(positionsBomb)
 
-//creazione quadrati dentro la griglia
+//quadrati dentro la griglia
 for(let i=0; i < totalSquares; i++){
     const square = createSquare()
     square.id = (i+1);
@@ -62,26 +64,23 @@ for(let i=0; i < totalSquares; i++){
     else{
         square.classList.add('width10');
     }
-
-
-
 }
 
-//function create square
+//FUNCTION CREO ELEMENTI DIV CON CLASSE SQUARE
 function createSquare(){
     const square = document.createElement('div');
     square.classList.add('square');
     return square;
 }
 
-// numero random in un determinato range
+// FUNCTION NUMERO RANDOM
 function numeroRandomRange(min, max){
     const range = (max - min) + 1;
     const numeroRandom = Math.floor(Math.random()*range + min);
     return numeroRandom; 
 }
 
-//numer unico
+//FUNCTION NUMERO UNICO RANDOM
 function numeroUnico (min, max, used){
     let numeroUnico = numeroRandomRange(min, max);
     while(used.includes(numeroUnico)){
@@ -90,9 +89,8 @@ function numeroUnico (min, max, used){
     return numeroUnico;
 }
 
-let score = 0;
 
-//function click cambio colore
+//FUNCTION CAMBIO COLORE AL CLICK
 for(let i=1; i <= totalSquares; i++){
     const square = document.getElementById(i);
     const isBomb = positionsBomb.includes(i);
@@ -113,6 +111,7 @@ for(let i=1; i <= totalSquares; i++){
     })
 }
 
+//FUNCTION MOSTRA BOMBE AL GAME OVER
 function showBombs(bombs){
     const allSquares = document.querySelectorAll('.square')
     for(let i=0; i < allSquares.length; i++){
