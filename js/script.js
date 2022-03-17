@@ -92,19 +92,18 @@ function numeroUnico (min, max, used){
 
 let score = 0;
 
-
 //function click cambio colore
 for(let i=1; i <= totalSquares; i++){
-    const square = document.getElementById(i)
-    
+    const square = document.getElementById(i);
+    const isBomb = positionsBomb.includes(i);
     square.addEventListener('click', function(){
-        const isBomb = positionsBomb.includes(i);
         if(isBomb){
             square.classList.add('bg-red');
             square.innerHTML = `<i class="fas fa-bomb"></i>`
             document.querySelector('.container').classList.add('pointer-none');
             document.querySelector('.game-over').classList.remove('d-none');
             document.querySelector('.game-over').innerHTML = `HAI PERSO! Il tuo punteggio è: ${score}!`
+            showBombs(positionsBomb)
         }
         else{
             square.classList.add('bg-blue');
@@ -114,5 +113,14 @@ for(let i=1; i <= totalSquares; i++){
     })
 }
 
-    
+function showBombs(bombs){
+    const allSquares = document.querySelectorAll('.square')
+    for(let i=0; i < allSquares.length; i++){
+        if(bombs.includes(i+1)){
+            const square = allSquares[i];
+            square.classList.add('bg-red');
+            square.innerHTML = `<i class="fas fa-bomb"></i>`
+        }
+    }
+}
 
